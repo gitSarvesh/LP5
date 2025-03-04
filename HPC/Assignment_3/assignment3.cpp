@@ -8,7 +8,8 @@ using namespace std;
 void minimum(vector<int> array){
     int min = INT_MAX;
     std::chrono::time_point<std::chrono::system_clock> start, end;
-    cout<<"Sequential Min"<<endl;
+    cout<<endl;
+    cout<<"Sequential Min";
     start = std::chrono::system_clock::now();
     for(auto i = array.begin(); i != array.end();i++){
         if(*i < min){
@@ -20,11 +21,11 @@ void minimum(vector<int> array){
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
     cout << endl;
     cout << "Minimum Element: " << min << endl;
-    cout << endl;
     std::cout << "finished computation at " << std::ctime(&end_time)
               << "elapsed time: " << elapsed_seconds_sqmin.count() << "s\n";
               
-    cout<<"Parallel Min"<<endl;
+    cout<<endl; 
+    cout<<"Parallel Min";
     int min_ele = INT_MAX;
     start = std::chrono::system_clock::now();
     #pragma omp parallel for reduction(min: min_ele)
@@ -46,6 +47,7 @@ void minimum(vector<int> array){
 
 void maximum(vector<int> array){
     int max = INT_MIN;
+    cout<<endl;
     cout<<"Sequential Max"<<endl;
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
@@ -58,11 +60,11 @@ void maximum(vector<int> array){
     std::chrono::duration<double> elapsed_seconds_sqmax = end - start;
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
     cout << "Maximum Element: " << max << endl;
-    cout << endl;
     std::cout << "finished computation at " << std::ctime(&end_time)
               << "elapsed time: " << elapsed_seconds_sqmax.count() << "s\n";
     
-    cout<<"Parallel Max"<<endl;
+    cout<<endl;
+    cout<<"Parallel Max";
     int max_ele = INT_MIN;
     start = std::chrono::system_clock::now();
     #pragma omp parallel for reduction(max: max_ele)
@@ -85,6 +87,7 @@ void maximum(vector<int> array){
 
 void sum(vector<int> array){
     int sum = 0;
+    cout<<endl;
     cout<<"Sequential Sum"<<endl;
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
@@ -95,11 +98,11 @@ void sum(vector<int> array){
     std::chrono::duration<double> elapsed_seconds_sqsum = end - start;
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
     cout << "Summation: " << sum << endl;
-    cout << endl;
     std::cout << "finished computation at " << std::ctime(&end_time)
               << "elapsed time: " << elapsed_seconds_sqsum.count() << "s\n"; 
     
-    cout<<"Parallel Sum"<<endl;
+    cout<<endl;
+    cout<<"Parallel Sum";
     sum = 0;
     start = std::chrono::system_clock::now();
     #pragma omp parallel for reduction(+: sum)
@@ -118,6 +121,7 @@ void sum(vector<int> array){
 }
 void average(vector<int> array){
     float avg = 0;
+    cout<<endl;
     cout<<"Sequential Avg"<<endl;
     std::chrono::time_point<std::chrono::system_clock> start, end;
     start = std::chrono::system_clock::now();
@@ -128,11 +132,11 @@ void average(vector<int> array){
     std::chrono::duration<double> elapsed_seconds_sqavg = end - start;
     std::time_t end_time = std::chrono::system_clock::to_time_t(end);
     cout << "Average: " << avg / array.size() << endl;
-    cout << endl;
     std::cout << "finished computation at " << std::ctime(&end_time)
               << "elapsed time: " << elapsed_seconds_sqavg.count() << "s\n"; 
     
-    cout<<"Parallel Avg"<<endl;
+    cout<<endl;
+    cout<<"Parallel Avg";
     avg = 0;
     start = std::chrono::system_clock::now();
     #pragma omp parallel for reduction(+: avg)
@@ -147,7 +151,7 @@ void average(vector<int> array){
     std::cout << "finished computation at " << std::ctime(&end_time_t)
               << "elapsed time: " << elapsed_seconds_plavg.count() << "s\n";
     cout << "Average(Parallel Reduction): " << avg / array.size() << endl;
-    cout<<"Speed Factor = "<<elapsed_seconds_sqmin.count()/elapsed_seconds_plmin.count()<<endl;
+    cout<<"Speed Factor = "<<elapsed_seconds_sqavg.count()/elapsed_seconds_plavg.count()<<endl;
 }
 
 int main(){
